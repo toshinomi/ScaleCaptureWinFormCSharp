@@ -16,7 +16,7 @@ namespace ScaleCaptureWinFormCSharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMaint());
+            Application.Run(new FormMain());
         }
     }
 }

@@ -13,7 +13,10 @@ using GrobalHook;
 
 namespace ScaleCaptureWinFormCSharp
 {
-    public partial class FormMaint : Form
+    /// <summary>
+    /// MainFormのロジック
+    /// </summary>
+    public partial class FormMain : Form
     {
         private Point m_mousePoint;
         private static IntPtr m_hHook = IntPtr.Zero;
@@ -21,7 +24,10 @@ namespace ScaleCaptureWinFormCSharp
         private ScaleNearestNeighbor m_scaleImgProc;
         bool m_bClose = false;
 
-        public FormMaint()
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public FormMain()
         {
             InitializeComponent();
 
@@ -43,6 +49,11 @@ namespace ScaleCaptureWinFormCSharp
             m_scaleImgProc = new ScaleNearestNeighbor();
         }
 
+        /// <summary>
+        /// タイトルバーマウスダウンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">イベントのデータ</param>
         private void OnMouseDownLblTitle(object sender, MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
@@ -53,6 +64,11 @@ namespace ScaleCaptureWinFormCSharp
             return;
         }
 
+        /// <summary>
+        /// タイトルバーマウスムーブのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">イベントのデータ</param>
         private void OnMouseMoveLblTitle(object sender, MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
@@ -64,6 +80,11 @@ namespace ScaleCaptureWinFormCSharp
             return;
         }
 
+        /// <summary>
+        /// マウスフックの設定
+        /// </summary>
+        /// <param name="_proc">マウスフックのデリゲート</param>
+        /// <returns>マウスフックの設定結果 成功/失敗</returns>
         private bool SetMouseHook(MouseHook.HookProcedureDelegate _proc)
         {
             bool bResult = true;
@@ -84,6 +105,9 @@ namespace ScaleCaptureWinFormCSharp
             return bResult;
         }
 
+        /// <summary>
+        /// マウスフックの削除
+        /// </summary>
         private void RemoveMouseHook()
         {
             if (MouseHook.UnhookWindowsHookEx(m_hHook) == false)
@@ -94,6 +118,13 @@ namespace ScaleCaptureWinFormCSharp
             return;
         }
 
+        /// <summary>
+        /// マウスフックの削除
+        /// </summary>
+        /// <param name="_nCode">現在のフックプロシージャに渡されたnCode</param>
+        /// <param name="_wParam">現在のフックプロシージャに渡されたwParam</param>
+        /// <param name="_lParam">現在のフックプロシージャに渡されたlParam</param>
+        /// <returns>フックチェーン内の次のフックプロシージャの戻り値</returns>
         private IntPtr MouseHookProc(int _nCode, IntPtr _wParam, IntPtr _lParam)
         {
             if (_nCode >= 0 && !m_bClose)
@@ -120,6 +151,11 @@ namespace ScaleCaptureWinFormCSharp
             return MouseHook.CallNextHookEx(m_hHook, _nCode, _wParam, _lParam);
         }
 
+        /// <summary>
+        /// スケールのスライダーのスクロールイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キー入力イベントのデータ</param>
         private void OnScrollSliderScale(object sender, EventArgs e)
         {
             labelValue.Text = (sliderScale.Value * 0.1).ToString();
@@ -127,6 +163,11 @@ namespace ScaleCaptureWinFormCSharp
             return;
         }
 
+        /// <summary>
+        /// 閉じるボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キー入力イベントのデータ</param>
         private void OnClickBtnClose(object sender, EventArgs e)
         {
             m_bClose = true;
@@ -143,6 +184,11 @@ namespace ScaleCaptureWinFormCSharp
             return;
         }
 
+        /// <summary>
+        /// 最小ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">キー入力イベントのデータ</param>
         private void OnClickBtnMinimizedIcon(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
