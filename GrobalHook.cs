@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GrobalHook
 {
     /// <summary>
-    /// グローバルフックのロジック
+    /// マウスフックのロジック
     /// </summary>
     public static class MouseHook
     {

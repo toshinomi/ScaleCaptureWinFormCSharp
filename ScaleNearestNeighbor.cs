@@ -11,29 +11,43 @@ using System.Windows.Forms;
 class ScaleNearestNeighbor
 {
     private Bitmap      m_bitmap;
-    private ProgressBar m_progressBar;
+
+    /// <summary>
+    /// ビットマップ
+    /// </summary>
     public Bitmap bitmap
     {
         get { return (Bitmap)m_bitmap.Clone(); }
     }
-    public ProgressBar progressBar
-    {
-        set { m_progressBar = value; }
-    }
 
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
     public ScaleNearestNeighbor()
     {
     }
 
+    /// <summary>
+    /// デスクトラクタ
+    /// </summary>
     ~ScaleNearestNeighbor()
     {
     }
 
+    /// <summary>
+    /// 初期化
+    /// </summary>
     public void Init()
     {
         m_bitmap = null;
     }
 
+    /// <summary>
+    /// 最近傍補間法の実行
+    /// </summary>
+    /// <param name="_bitmap">ビットマップ</param>
+    /// <param name="_fScale">スケール</param>
+    /// <returns>実行結果 成功/失敗</returns>
     public bool GoImgProc(Bitmap _bitmap,  float _fScale)
     {
         bool bRst = true;
